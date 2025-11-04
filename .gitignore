@@ -1,0 +1,110 @@
+# =============================
+# 🌐 FRONTEND (Vue.js)
+# =============================
+
+# Node modules
+frontend/node_modules/
+
+# Build output
+frontend/dist/
+frontend/build/
+frontend/coverage/
+
+# Environment variables
+frontend/.env
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.production.local
+frontend/.env.test.local
+
+# Logs
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/pnpm-debug.log*
+
+# Editor settings
+frontend/.vscode/
+frontend/.idea/
+frontend/*.suo
+frontend/*.ntvs*
+frontend/*.njsproj
+frontend/*.sln
+
+# System files
+frontend/.DS_Store
+frontend/Thumbs.db
+
+# Optional lock files (tùy chọn)
+frontend/package-lock.json
+frontend/yarn.lock
+frontend/pnpm-lock.yaml
+
+# =============================
+# ⚙️ BACKEND (Node.js / Express)
+# =============================
+
+# Node modules
+backend/node_modules/
+
+# Logs
+backend/logs/
+backend/*.log
+backend/npm-debug.log*
+backend/yarn-debug.log*
+backend/yarn-error.log*
+
+# Environment variables
+backend/.env
+backend/.env.local
+
+# Build / temp output
+backend/dist/
+backend/build/
+backend/tmp/
+backend/coverage/
+
+# Runtime data
+backend/pids/
+backend/*.pid
+backend/*.seed
+backend/*.pid.lock
+
+# OS / IDE files
+backend/.DS_Store
+backend/Thumbs.db
+backend/.vscode/
+backend/.idea/
+
+# Optional cache and lock files
+backend/package-lock.json
+backend/yarn.lock
+backend/pnpm-lock.yaml
+
+# =============================
+# 🔧 GLOBAL SETTINGS
+# =============================
+
+# Ignore system / editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Ignore environment config in root
+.env
+.env.local
+.env.*.local
+
+# Optional build and cache
+/dist/
+/build/
+/coverage/
+/cache/
+
+# Optional history for some extensions
+.history/
+
+# Ignore uploads or generated files (tùy chọn)
+uploads/
+public/uploads/
