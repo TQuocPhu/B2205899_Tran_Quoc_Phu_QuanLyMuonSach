@@ -2,6 +2,7 @@ import express from "express";
 import Book from "../models/Book.js";
 import { adminAuth } from "../middleware/auth.js";
 import e from "express";
+import upload from "../middleware/upload.js";
 
 const router = express.Router();
 
@@ -62,7 +63,7 @@ router.get("/:id", async (req, res) => {
  * POST /api/books
  * Thêm sách mới (admin)
  */
-router.post("/", adminAuth, async (req, res) => {
+router.post("/", adminAuth, upload.single("HinhAnh"), async (req, res) => {
     try {
         const { MaSach, TenSach, TacGia, NamXuatBan, SoQuyen, MaNXB, HinhAnh } = req.body;
 
@@ -78,7 +79,7 @@ router.post("/", adminAuth, async (req, res) => {
             NamXuatBan,
             SoQuyen,
             MaNXB,
-            HinhAnh,
+            HinhAnh: req.file ? `/uploads/${req.file.filename}` : "",
         });
 
         res.status(201).json({ message: "Đã thêm sách", book });
@@ -91,9 +92,12 @@ router.post("/", adminAuth, async (req, res) => {
  * PUT /api/books/:id
  * Cập nhật sách (admin)
  */
-router.put("/:id", adminAuth, async (req, res) => {
+router.put("/:id", adminAuth, upload.single("HinhAnh"), async (req, res) => {
     try {
-        const book = await Book.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        const data = { ...req.body };
+
+        if (req.file) data.HinhAnh = `/uploads/${req.file.filename}`;
+        const book = await Book.findByIdAndUpdate(req.params.id, data, { new: true });
         if (!book) {
             return res.status(404).json({ message: "Không tìm thấy sách!" });
         }

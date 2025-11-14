@@ -15,6 +15,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Cho phép truy cập file ảnh public
+app.use("/uploads", express.static("uploads"));
+
 // --- API Routes ---
 app.use("/api/auth", authUserRoutes);
 app.use("/api/admin/auth", authAdminRoutes);

@@ -62,10 +62,12 @@ router.post("/", adminAuth, async (req, res) => {
  */
 router.put("/:id", adminAuth, async (req, res) => {
     try {
+        const { MaNXB, TenNXB, DiaChi, DienThoai } = req.body;
+
         if (!MaNXB || !TenNXB) {
             return res.status(400).json({ message: "Mã NXB và Tên NXB là bắt buộc" });
         }
-        const publisher = await Publisher.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        const publisher = await Publisher.findByIdAndUpdate(req.params.id, { MaNXB, TenNXB, DiaChi, DienThoai }, { new: true });
         if (!publisher) return res.status(404).json({ message: "Không tìm thấy NXB" });
         res.json({ message: "Đã cập nhật NXB", publisher });
     } catch (err) {
