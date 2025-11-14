@@ -8,7 +8,7 @@ const generateToken = (id) => jwt.sign({ id }, process.env.JWT_SECRET, { expires
 //Đăng ký
 router.post("/register", async (req, res) => {
     try {
-        const { MaDocGia, HoLot, Ten, Email, MatKhau, SoDienThoai } = req.body
+        const { MaDocGia, HoLot, Ten, Email, NgaySinh, DiaChi, SoDienThoai, MatKhau } = req.body
         const existEmail = await DocGia.findOne({ Email });
         if (existEmail) return res.status(400).json({ message: "Email đã tồn tại!" });
         const existPhone = await DocGia.findOne({ SoDienThoai });
@@ -22,18 +22,40 @@ router.post("/register", async (req, res) => {
 });
 
 //Đăng nhập
+// router.post("/login", async (req, res) => {
+//     try {
+//         const { Email, MatKhau } = req.body;
+//         const user = await DocGia.findOne({ Email });
+//         if (!user || !(await user.matchPassword(MatKhau))) {
+//             return res.status(400).json({ message: "Email hoặc mật không không đúng!" });
+//         }
+
+//         const token = generateToken(user._id);
+//         res.json({ token, user });
+//     } catch (err) {
+//         res.status(500).json({ message: "Đã có lỗi trong quá trình đăng nhập độc giả ", err });
+//     }
+// });
 router.post("/login", async (req, res) => {
     try {
-        const { Email, MatKhau } = req.body;
-        const user = await DocGia.findOne({ Email });
+        const { TaiKhoan, MatKhau } = req.body;
+
+        const user = await DocGia.findOne({
+            $or: [{ Email: TaiKhoan }, { MaDocGia: TaiKhoan }],
+        });
+
+        console.log("TaiKhoan:", TaiKhoan);
+        console.log("Tìm thấy user:", user ? user.Email : "Không có");
+        console.log("Nhập mật khẩu:", MatKhau);
+        
         if (!user || !(await user.matchPassword(MatKhau))) {
-            return res.status(400).json({ message: "Email hoặc mật không không đúng!" });
+            return res.status(400).json({ message: "Sai Email/Mã độc giả hoặc mật khẩu!" });
         }
 
         const token = generateToken(user._id);
         res.json({ token, user });
     } catch (err) {
-        res.status(500).json({ message: "Đã có lỗi trong quá trình đăng nhập độc giả ", err });
+        res.status(500).json({ message: "Lỗi đăng nhập", err });
     }
 });
 

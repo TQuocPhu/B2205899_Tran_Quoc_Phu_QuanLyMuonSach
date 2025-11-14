@@ -16,7 +16,7 @@ router.post("/login", async (req, res) => {
         }
 
         // Tìm nhân viên theo email
-        const admin = await admin.findOne({ Email });
+        const admin = await NhanVien.findOne({ Email });
         if (!admin) {
             return res.status(400).json({ message: "Email hoặc mật khẩu không đúng!" });
         }
@@ -34,4 +34,6 @@ router.post("/login", async (req, res) => {
         console.error("Lỗi đăng nhập:", err);
         res.status(500).json({ message: "Đã xảy ra lỗi khi đăng nhập tài khoản quản lý", err });
     }
-})
+});
+
+export default router;
