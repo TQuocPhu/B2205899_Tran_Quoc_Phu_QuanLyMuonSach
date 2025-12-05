@@ -36,7 +36,7 @@
       </aside>
 
       <!-- Main content -->
-      <div class="flex-grow-1 d-flex flex-column">
+      <div class="flex-grow-1 d-flex flex-column" style="margin-left: 250px">
         <nav class="navbar navbar-light bg-light border-bottom flex-shrink-0">
           <div class="container-fluid">
             <span class="navbar-text fw-bold text-primary">
@@ -78,8 +78,16 @@ const logout = () => {
 }
 
 aside {
-  height: 100vh;
-  overflow-y: auto;
+  /* height: 100vh;
+  overflow-y: auto; */
+  width: 250px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background: #212529;
+  color: white;
+  overflow: hidden;
 }
 
 .router-link-exact-active {

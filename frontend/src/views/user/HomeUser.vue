@@ -1,16 +1,22 @@
 <template>
   <UserLayout>
-    <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+    <div
+      class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2"
+    >
       <h3 class="fw-bold text-primary">Danh sách Sách</h3>
       <div class="d-flex flex-wrap align-items-center gap-2">
         <input
           v-model="filters.q"
           class="form-control"
           placeholder="Tìm theo tên hoặc tác giả"
-          style="max-width: 200px"
+          style="max-width: 588px"
           @keyup.enter="fetchBooks"
         />
-        <select v-model="filters.publisher" @change="fetchBooks" class="form-select">
+        <select
+          v-model="filters.publisher"
+          @change="fetchBooks"
+          class="form-select"
+        >
           <option value="">Tất cả NXB</option>
           <option v-for="p in publishers" :key="p._id" :value="p._id">
             {{ p.TenNXB }}

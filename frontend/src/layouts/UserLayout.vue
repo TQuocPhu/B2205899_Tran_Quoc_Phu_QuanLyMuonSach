@@ -65,7 +65,7 @@
       </div>
     </nav>
 
-    <main class="container p-3 mt-0">
+    <main class="container p-3 pt-5">
       <slot />
     </main>
 

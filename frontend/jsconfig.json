@@ -1,35 +1,14 @@
-// {
-//   "compilerOptions": {
-//     "target": "es5",
-//     "module": "esnext",
-//     "baseUrl": "./",
-//     "moduleResolution": "node",
-//     "paths": {
-//       "@/*": [
-//         "src/*"
-//       ]
-//     },
-//     "lib": [
-//       "esnext",
-//       "dom",
-//       "dom.iterable",
-//       "scripthost"
-//     ]
-//   }
-// }
 {
   "compilerOptions": {
     "baseUrl": ".",
     "ignoreDeprecations": "6.0",
     "paths": {
-      "@/*": ["src/*"],
-      "@components/*": ["src/components/*"],
-      "@views/*": ["src/views/*"],
-      "@store/*": ["src/store/*"],
-      "@router/*": ["src/router/*"]
+      "@/*": ["src/*"]
     },
-    "checkJs": true,      // bật kiểm tra JS cơ bản
-    "allowJs": true        // cho phép JS trong project
+    "allowJs": true,
+    "checkJs": false,
+    "moduleResolution": "node",
+    "target": "esnext"
   },
   "exclude": ["node_modules", "dist"]
 }

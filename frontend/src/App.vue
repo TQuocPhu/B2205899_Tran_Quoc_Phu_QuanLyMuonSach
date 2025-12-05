@@ -17,7 +17,7 @@ body {
   margin: 0 !important;
   padding: 0 !important;
   height: 100%;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 #app {
