@@ -18,41 +18,42 @@ import Dashboard from "@/views/admin/Dashboard.vue";
 
 const routes = [
     // --- USER ROUTES ---
-    { path: "/", component: HomeUser },
-    { path: "/login", component: UserLogin },
-    { path: "/register", component: UserRegister },
+    { path: "/", component: HomeUser, meta: { title: "Trang chủ" } },
+    { path: "/login", component: UserLogin, meta: { title: "Đăng nhập" } },
+    { path: "/register", component: UserRegister, meta: { title: "Đăng ký" } },
     {
         path: "/history",
         component: BorrowingHistory,
-        meta: { requiresAuth: true },
+        meta: { requiresAuth: true, title: "Lịch sử mượn sách" },
     },
     {
         path: '/book/:id',
         name: 'BookDetail',
         component: BookDetail,
+        meta: { title: "Chi tiết sách" }
     },
 
     // --- ADMIN ROUTES ---
-    { path: "/admin/login", component: AdminLogin },
+    { path: "/admin/login", component: AdminLogin, meta: { title: "Admin - Đăng nhập" } },
     {
         path: "/admin/dashboard",
         component: Dashboard,
-        meta: { requiresAdmin: true },
+        meta: { requiresAdmin: true, title: "Admin - Dashboard" },
     },
     {
         path: "/admin/books",
         component: ManageBooks,
-        meta: { requiresAdmin: true },
+        meta: { requiresAdmin: true, title: "Quản lý sách" },
     },
     {
         path: "/admin/publishers",
         component: ManagePublishers,
-        meta: { requiresAdmin: true },
+        meta: { requiresAdmin: true, title: "Quản lý nhà xuất bản" },
     },
     {
         path: "/admin/borrow",
         component: ManageBorrow,
-        meta: { requiresAdmin: true },
+        meta: { requiresAdmin: true, title: "Quản lý mượn trả" },
     },
 ];
 
@@ -65,6 +66,11 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
     const authStore = useAuthStore();
     const adminStore = useAdminStore();
+
+    const baseTitle = "Hệ thống thư viện";
+    document.title = to.meta.title
+        ? `${to.meta.title} | ${baseTitle}`
+        : baseTitle;
 
     // Route yêu cầu user đăng nhập
     if (to.meta.requiresAuth && !authStore.isLoggedIn) {
